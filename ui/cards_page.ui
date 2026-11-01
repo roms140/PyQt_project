@@ -38,6 +38,9 @@
           <height>0</height>
          </size>
         </property>
+        <property name="placeholderText">
+         <string>Категории</string>
+        </property>
        </widget>
       </item>
       <item>
