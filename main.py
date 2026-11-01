@@ -1,44 +1,40 @@
+import io
 import sys
-from PyQt6.QtWidgets import QApplication, QWidget, QLineEdit, QPushButton, QLabel, QCheckBox, QPlainTextEdit
+from PyQt6 import uic
+from PyQt6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox, QHeaderView, QStackedWidget
+import sqlite3
+from pages.cards_page import CardsPage
+from pages.study_pages import StudyPage
 
 
-class MacOrder(QWidget):
+class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.initUI()
 
-    def initUI(self):
-        self.setGeometry(300, 150, 350, 400)
-        self.setWindowTitle("Заказ в Макдональдсе")
+        uic.loadUi("ui/main_window_page.ui", self)
+        self.cardsPage = CardsPage()
+        self.studyPage = StudyPage()
 
-        self.cheeseburger = QCheckBox("Чизбургер", self)
-        self.cheeseburger.move(10, 0)
-        self.hamburger = QCheckBox("Гамбургер", self)
-        self.hamburger.move(10, 25)
-        self.kola = QCheckBox("Кока-кола", self)
-        self.kola.move(10, 50)
-        self.nuggets = QCheckBox("Наггетсы", self)
-        self.nuggets.move(10, 75)
+        self.stackedWidget.addWidget(self.cardsPage)
+        self.stackedWidget.addWidget(self.studyPage)
+        self.homeButton.clicked.connect(
+            lambda: self.stackedWidget.setCurrentIndex(0)
+        )
 
-        self.menu_checkboxes = [self.cheeseburger,
-                                self.hamburger, self.kola, self.nuggets]
+        self.cardsButton.clicked.connect(
+            lambda: self.stackedWidget.setCurrentIndex(1)
+        )
 
-        self.order_btn = QPushButton("Заказать", self)
-        self.order_btn.move(10, 125)
-        self.order_btn.clicked.connect(self.show_order)
+        self.studyButton.clicked.connect(
+            lambda: self.stackedWidget.setCurrentIndex(2)
+        )
 
-        self.result = QPlainTextEdit(self)
-        self.result.move(10, 160)
-
-    def show_order(self):
-        self.result.setPlainText("Ваш заказ:\n")
-        for checkbox in self.menu_checkboxes:
-            if checkbox.isChecked():
-                self.result.appendPlainText(checkbox.text())
+        self.startStudyButton.clicked.connect(
+            lambda: self.stackedWidget.setCurrentIndex(2))
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = MacOrder()
+    ex = MainWindow()
     ex.show()
     sys.exit(app.exec())
