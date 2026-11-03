@@ -15,6 +15,17 @@ def add_card(question, answer, category):
     con.close()
 
 
+def get_data_card(card_id):
+    con = get_connection()
+    cur = con.cursor()
+
+    card = cur.execute(
+        "SELECT question, answer, category FROM cards WHERE id = ?", (card_id,)).fetchone()
+
+    con.close()
+    return card
+
+
 def get_cards_to_review():
     pass
 
@@ -30,6 +41,16 @@ def get_all_cards():
     return cards
 
 
+def get_all_categories():
+    con = get_connection()
+    cur = con.cursor()
+
+    categories = cur.execute("SELECT DISTINCT category FROM cards").fetchall()
+
+    con.close()
+    return categories
+
+
 def delete_card(card_id):
     con = get_connection()
     cur = con.cursor()
@@ -37,8 +58,14 @@ def delete_card(card_id):
     con.commit()
     con.close()
 
-def update_card():
-    pass
+
+def edit_card(card_id, question, answer, category):
+    con = get_connection()
+    cur = con.cursor()
+    queue = """UPDATE cards SET question = ?, answer = ?, category = ? WHERE id = ?"""
+    cur.execute(queue, (question, answer, category, card_id))
+    con.commit()
+    con.close()
 
 
 def update_review_date():

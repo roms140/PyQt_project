@@ -1,20 +1,23 @@
 from PyQt6.QtWidgets import QDialog, QMessageBox
 from PyQt6 import uic
-
+from database.queries import get_data_card as db_get_data_card
 
 class CardDialog(QDialog):
-    def __init__(self, parent=None, card_data=None):
+    def __init__(self, parent=None, id_card=None):
         super().__init__(parent)
         uic.loadUi("ui/card_dialog.ui", self)
-        if card_data is not None:
-            self.addButton.clicked.connect(self.edit_card)
-            self.addButton.setText("Редактирование карты")
+        self.saveButton.clicked.connect(self.save_card)
+        self.id_card = id_card
+        if id_card is not None:
+            self.saveButton.setText("Отредактировать")
+            self.setWindowTitle("Редактирование карты")
             self.get_data_card()
-        else:
-            self.addButton.clicked.connect(self.save_card)
 
     def get_data_card(self):
-        pass
+        question, answer, category = db_get_data_card(self.id_card)
+        self.questionLineEdit.setText(question)
+        self.answerPlainTextEdit.setPlainText(answer)
+        self.categoryLineEdit.setText(category)
 
     def save_card(self):
         question = self.questionLineEdit.text().strip()
@@ -27,9 +30,6 @@ class CardDialog(QDialog):
 
         self.card_data = (question, answer, category)
         self.accept()
-
-    def edit_card(self):
-        pass
 
 
 

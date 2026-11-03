@@ -1,8 +1,7 @@
 import io
 import sys
 from PyQt6 import uic
-from PyQt6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessageBox, QHeaderView, QStackedWidget
-import sqlite3
+from PyQt6.QtWidgets import QApplication, QMainWindow
 from pages.cards_page import CardsPage
 from pages.study_pages import StudyPage
 from database.db import create_tables
@@ -40,3 +39,4 @@ if __name__ == '__main__':
     ex = MainWindow()
     ex.show()
     sys.exit(app.exec())
+

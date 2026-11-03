@@ -21,7 +21,7 @@
        <widget class="QLineEdit" name="searchLineEdit">
         <property name="minimumSize">
          <size>
-          <width>150</width>
+          <width>200</width>
           <height>0</height>
          </size>
         </property>
@@ -39,7 +39,26 @@
          </size>
         </property>
         <property name="placeholderText">
-         <string>Категории</string>
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="editButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Редактировать</string>
         </property>
        </widget>
       </item>
