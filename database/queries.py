@@ -1,5 +1,5 @@
 from database.db import get_connection
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 def add_card(question, answer, category):
@@ -11,6 +11,19 @@ def add_card(question, answer, category):
     created_at, next_review_at, interval_minutes)
     VALUES (?, ?, ?, ?, ?, ?)"""
     cur.execute(request, (question, answer, category, created_at, created_at, 0))
+    con.commit()
+    con.close()
+
+
+def add_review_history(card_id, rating, interval_minutes):
+    con = get_connection()
+    cur = con.cursor()
+    now = datetime.now()
+    reviewed_at = now.isoformat(timespec="seconds")
+    request = """INSERT INTO review_history (card_id, reviewed_at, rating, 
+    interval_minutes)
+    VALUES (?, ?, ?, ?)"""
+    cur.execute(request, (card_id, reviewed_at, rating, interval_minutes))
     con.commit()
     con.close()
 
@@ -81,5 +94,12 @@ def edit_card(card_id, question, answer, category):
     con.close()
 
 
-def update_review_date():
-    pass
+def update_card_review(card_id, interval_minutes):
+    con = get_connection()
+    cur = con.cursor()
+    next_review_at = datetime.now() + timedelta(minutes=interval_minutes)
+    next_review_at_iso = next_review_at.isoformat(timespec="seconds")
+    request = """UPDATE cards SET next_review_at = ?, interval_minutes = ? WHERE id = ?"""
+    cur.execute(request, (next_review_at_iso, interval_minutes, card_id))
+    con.commit()
+    con.close()

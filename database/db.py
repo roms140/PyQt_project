@@ -26,7 +26,7 @@ def create_tables():
     reviewed_at TEXT NOT NULL, 
     rating TEXT NOT NULL, 
     interval_minutes INTEGER NOT NULL, 
-    FOREIGN KEY (card_id) REFERENCES cards(id))""")
+    FOREIGN KEY (card_id) REFERENCES cards(id) ON DELETE CASCADE)""")
 
     con.commit()
     con.close()

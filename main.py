@@ -5,6 +5,7 @@ from PyQt6.QtWidgets import QApplication, QMainWindow
 from pages.cards_page import CardsPage
 from pages.study_pages import StudyPage
 from database.db import create_tables
+from database.queries import get_all_cards
 
 
 class MainWindow(QMainWindow):
@@ -17,6 +18,7 @@ class MainWindow(QMainWindow):
         self.studyPage = StudyPage()
 
         self.cardsPage.cards_changed.connect(self.studyPage.refresh_page)
+        self.studyPage.cards_changed.connect(lambda: self.cardsPage.load_cards(get_all_cards()))
 
         self.stackedWidget.addWidget(self.cardsPage)
         self.stackedWidget.addWidget(self.studyPage)

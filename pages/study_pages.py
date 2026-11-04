@@ -1,9 +1,12 @@
 from PyQt6.QtWidgets import QMainWindow
 from PyQt6 import uic
-from database.queries import get_all_cards, get_cards_for_repetition
+from PyQt6.QtCore import pyqtSignal
+from database.queries import get_all_cards, get_cards_for_repetition, add_review_history, update_card_review
 
 
 class StudyPage(QMainWindow):
+    cards_changed = pyqtSignal()
+
     def __init__(self):
         super().__init__()
 
@@ -11,12 +14,13 @@ class StudyPage(QMainWindow):
 
         self.refresh_page()
         self.showAnswerButton.clicked.connect(self.show_answer)
-        self.againButton.clicked.connect(self.next_card)
-        self.hardButton.clicked.connect(self.next_card)
-        self.goodButton.clicked.connect(self.next_card)
-        self.easyButton.clicked.connect(self.next_card)
+        self.againButton.clicked.connect(lambda : self.next_card("again"))
+        self.hardButton.clicked.connect(lambda : self.next_card("hard"))
+        self.goodButton.clicked.connect(lambda : self.next_card("good"))
+        self.easyButton.clicked.connect(lambda : self.next_card("easy"))
 
     def refresh_page(self):
+        """Обновляет страницу обучения в зависимости от доступных карточек."""
         self.cards = get_all_cards()
 
         if not self.cards:
@@ -48,15 +52,17 @@ class StudyPage(QMainWindow):
         self.statusLabel.show()
 
     def show_card(self):
+        """Отображает текущую карточку для повторения."""
         if self.current_card_index >= len(self.cards_for_repetition):
             self.refresh_page()
             return
         self.showAnswerButton.setEnabled(True)
-        card = self.cards_for_repetition[self.current_card_index]
+        self.current_card = self.cards_for_repetition[self.current_card_index]
 
-        self.questionLabel.setText(card[1])
-        self.answerLabel.setText(card[2])
+        self.questionLabel.setText(self.current_card[1])
+        self.answerLabel.setText(self.current_card[2])
 
+        # Скрываем ответ и оценки перед отображением следующей карточки
         self.answerLabel.hide()
         self.ratingFrame.hide()
 
@@ -65,6 +71,21 @@ class StudyPage(QMainWindow):
         self.ratingFrame.show()
         self.showAnswerButton.setEnabled(False)
 
-    def next_card(self):
+    def next_card(self, rating):
+        """Добаление истории повторения в БД"""
+        if rating == "again":
+            interval_minutes = 10
+        elif rating == "hard":
+            interval_minutes = 24 * 60
+        elif rating == "good":
+            interval_minutes = 3 * 24 * 60
+        elif rating == "easy":
+            interval_minutes =  7 * 24 * 60
+        card_id = self.current_card[0]
+        update_card_review(card_id, interval_minutes)
+        add_review_history(card_id, rating, interval_minutes)
+
+        self.cards_changed.emit()
+
         self.current_card_index += 1
         self.show_card()
