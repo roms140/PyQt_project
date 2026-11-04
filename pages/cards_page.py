@@ -3,10 +3,12 @@ from PyQt6 import uic
 from database.queries import add_card as db_add_card, get_all_cards, delete_card as db_delete_card, edit_card as db_edit_card, get_all_categories
 from datetime import datetime
 from dialogs.card_dialog import CardDialog
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, pyqtSignal
 
 
 class CardsPage(QMainWindow):
+    cards_changed = pyqtSignal()
+
     def __init__(self):
         super().__init__()
 
@@ -81,6 +83,7 @@ class CardsPage(QMainWindow):
             db_add_card(question, answer, category)
             self.load_cards(get_all_cards())
             self.load_categories()
+            self.cards_changed.emit()
 
     def edit_card(self):
         row = self.cardsTableWidget.currentRow()
@@ -95,6 +98,7 @@ class CardsPage(QMainWindow):
             db_edit_card(card_id, question, answer, category)
             self.load_cards(get_all_cards())
             self.load_categories()
+            self.cards_changed.emit()
 
     def delete_card(self):
         row = self.cardsTableWidget.currentRow()
@@ -113,3 +117,4 @@ class CardsPage(QMainWindow):
             db_delete_card(card_id)
             self.load_cards(get_all_cards())
             self.load_categories()
+            self.cards_changed.emit()

@@ -7,10 +7,10 @@ def add_card(question, answer, category):
     cur = con.cursor()
     now = datetime.now()
     created_at = now.isoformat(timespec="seconds")
-    queue = """INSERT INTO cards (question, answer, category, 
+    request = """INSERT INTO cards (question, answer, category, 
     created_at, next_review_at, interval_minutes)
     VALUES (?, ?, ?, ?, ?, ?)"""
-    cur.execute(queue, (question, answer, category, created_at, created_at, 0))
+    cur.execute(request, (question, answer, category, created_at, created_at, 0))
     con.commit()
     con.close()
 
@@ -26,8 +26,21 @@ def get_data_card(card_id):
     return card
 
 
-def get_cards_to_review():
-    pass
+def get_cards_for_repetition():
+    con = get_connection()
+    cur = con.cursor()
+
+    now = datetime.now()
+    current_date = now.isoformat(timespec="seconds")
+
+    request = """SELECT id, question, answer, category, next_review_at 
+    FROM cards 
+    WHERE next_review_at <= ?
+    ORDER BY next_review_at ASC"""
+    cards = cur.execute(request, (current_date,)).fetchall()
+
+    con.close()
+    return cards
 
 
 def get_all_cards():
@@ -62,8 +75,8 @@ def delete_card(card_id):
 def edit_card(card_id, question, answer, category):
     con = get_connection()
     cur = con.cursor()
-    queue = """UPDATE cards SET question = ?, answer = ?, category = ? WHERE id = ?"""
-    cur.execute(queue, (question, answer, category, card_id))
+    request = """UPDATE cards SET question = ?, answer = ?, category = ? WHERE id = ?"""
+    cur.execute(request, (question, answer, category, card_id))
     con.commit()
     con.close()
 

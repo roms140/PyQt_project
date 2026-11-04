@@ -16,6 +16,8 @@ class MainWindow(QMainWindow):
         self.cardsPage = CardsPage()
         self.studyPage = StudyPage()
 
+        self.cardsPage.cards_changed.connect(self.studyPage.refresh_page)
+
         self.stackedWidget.addWidget(self.cardsPage)
         self.stackedWidget.addWidget(self.studyPage)
         self.homeButton.clicked.connect(

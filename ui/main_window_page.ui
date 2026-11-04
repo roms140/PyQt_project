@@ -264,7 +264,23 @@
                <property name="frameShadow">
                 <enum>QFrame::Shadow::Raised</enum>
                </property>
-               <layout class="QVBoxLayout" name="verticalLayout_3" stretch="3,7">
+               <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,3,7">
+                <item>
+                 <widget class="QLabel" name="titleLabel">
+                  <property name="font">
+                   <font>
+                    <pointsize>25</pointsize>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>Главная</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+                  </property>
+                 </widget>
+                </item>
                 <item>
                  <widget class="QFrame" name="welcomeFrame">
                   <property name="sizePolicy">
@@ -291,7 +307,7 @@
                     <widget class="QLabel" name="welcomeTitle">
                      <property name="font">
                       <font>
-                       <pointsize>22</pointsize>
+                       <pointsize>18</pointsize>
                        <bold>true</bold>
                       </font>
                      </property>
@@ -329,7 +345,7 @@
                     <widget class="QLabel" name="reviewsTitle">
                      <property name="font">
                       <font>
-                       <pointsize>20</pointsize>
+                       <pointsize>18</pointsize>
                        <italic>false</italic>
                        <bold>true</bold>
                       </font>
