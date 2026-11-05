@@ -14,6 +14,7 @@ class CardsPage(QMainWindow):
 
         uic.loadUi("ui/cards_page.ui", self)
 
+        # Настройка таблицы
         self.cardsTableWidget.setHorizontalHeaderLabels(
             ["Вопрос", "Категория", "Следующее повторение"])
         header = self.cardsTableWidget.horizontalHeader()
