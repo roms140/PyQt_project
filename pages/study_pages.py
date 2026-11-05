@@ -55,7 +55,9 @@ class StudyPage(QMainWindow):
         """Отображает текущую карточку для повторения."""
         if self.current_card_index >= len(self.cards_for_repetition):
             self.refresh_page()
+            self.progressLabel.setText("")
             return
+        self.progressLabel.setText(f"Карточка {self.current_card_index + 1} из {len(self.cards_for_repetition)}")
         self.showAnswerButton.setEnabled(True)
         self.current_card = self.cards_for_repetition[self.current_card_index]
 
