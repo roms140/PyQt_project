@@ -91,14 +91,14 @@
       <property name="frameShadow">
        <enum>QFrame::Shadow::Raised</enum>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,1,0,1,1,2">
        <item>
         <widget class="QLabel" name="questionCaptionLabel">
          <property name="text">
           <string>Вопрос</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignHCenter</set>
          </property>
         </widget>
        </item>
@@ -114,7 +114,26 @@
           <string>Что такое декоратор в Python?</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="categoryLabel">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Категория</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
          </property>
         </widget>
        </item>
@@ -131,17 +150,14 @@
           <string>Ответ</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignHCenter</set>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="answerLabel">
-         <property name="text">
-          <string>Ответ пока скрыт</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignCenter</set>
+        <widget class="QTextEdit" name="answerTextEdit">
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>

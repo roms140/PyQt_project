@@ -356,7 +356,7 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="label">
+                    <widget class="QLabel" name="quantityCardsLabel">
                      <property name="text">
                       <string>Всего к повторению: 0</string>
                      </property>

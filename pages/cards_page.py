@@ -19,9 +19,10 @@ class CardsPage(QMainWindow):
             ["Вопрос", "Категория", "Следующее повторение"])
         header = self.cardsTableWidget.horizontalHeader()
 
-        header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
-        header.setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
-        header.setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(0, QHeaderView.ResizeMode.Interactive)
+        header.setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
+        header.setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
+        self.cardsTableWidget.setColumnWidth(0, 400)
 
         self.cardsTableWidget.setSelectionBehavior(
             QAbstractItemView.SelectionBehavior.SelectRows
@@ -29,6 +30,10 @@ class CardsPage(QMainWindow):
 
         self.cardsTableWidget.setSelectionMode(
             QAbstractItemView.SelectionMode.SingleSelection
+        )
+
+        self.cardsTableWidget.setEditTriggers(
+            QAbstractItemView.EditTrigger.NoEditTriggers
         )
 
         self.addButton.clicked.connect(self.add_card)
