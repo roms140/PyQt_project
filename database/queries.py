@@ -61,7 +61,7 @@ def get_all_cards():
     cur = con.cursor()
 
     cards = cur.execute(
-        "SELECT id, question, category, next_review_at FROM cards").fetchall()
+        "SELECT id, question, category, next_review_at FROM cards ORDER BY next_review_at").fetchall()
 
     con.close()
     return cards

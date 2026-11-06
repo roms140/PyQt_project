@@ -1,0 +1,113 @@
+/* Основной фон */
+QMainWindow, QDialog {
+    background-color: #F5F6FA;
+}
+
+/* Общие виджеты */
+QWidget {
+    color: #252638;
+}
+
+/* Заголовки */
+QLabel {
+    background: transparent;
+}
+
+/* Кнопки */
+QPushButton {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E3EC;
+    border-radius: 8px;
+    padding: 5px 12px;
+    color: #333449;
+}
+
+QPushButton:hover {
+    background-color: #F0EDFF;
+    border-color: #9B85F5;
+}
+
+QPushButton:pressed {
+    background-color: #E4DEFF;
+}
+
+/* Поля ввода */
+QLineEdit, QTextEdit, QPlainTextEdit {
+    background-color: white;
+    border: 1px solid #E0E1EA;
+    border-radius: 8px;
+    padding: 9px;
+    selection-background-color: #C8BBFF;
+}
+
+QLineEdit:focus, QTextEdit:focus {
+    border: 1px solid #856BE5;
+}
+
+/* Выпадающие списки */
+QComboBox {
+    background-color: white;
+    border: 1px solid #E0E1EA;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+QComboBox:hover {
+    border-color: #9B85F5;
+}
+
+QComboBox::drop-down {
+    background-color: #F0EFF6;
+    border: none;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    width: 28px;
+}
+
+QComboBox::drop-down:hover {
+    background-color: #E4DEFF;
+}
+
+/* Таблицы */
+QTableWidget {
+    background-color: white;
+    border: 1px solid #E5E5ED;
+    border-radius: 10px;
+    gridline-color: #EEEEF3;
+    selection-background-color: #EAE5FF;
+    selection-color: #252638;
+}
+
+QHeaderView {
+    background-color: #F0EFF6;
+}
+
+QHeaderView::section {
+    background-color: #F0EFF6;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* Скроллбары */
+QScrollBar:vertical {
+    background: transparent;
+    width: 8px;
+    margin: 0;
+}
+
+QScrollBar::handle:vertical {
+    background: #C9C7D5;
+    border-radius: 4px;
+    min-height: 25px;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0;
+}
+
+QTableCornerButton::section {
+    background-color: #F0EFF6;
+    border: none;
+}

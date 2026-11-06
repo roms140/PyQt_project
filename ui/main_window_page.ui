@@ -340,7 +340,7 @@
                   <property name="frameShadow">
                    <enum>QFrame::Shadow::Raised</enum>
                   </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_5">
+                  <layout class="QVBoxLayout" name="verticalLayout_5" stretch="1,1,0,0,1">
                    <item>
                     <widget class="QLabel" name="reviewsTitle">
                      <property name="font">
@@ -356,9 +356,32 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="quantityCardsLabel">
+                    <widget class="QLabel" name="informationLabel">
+                     <property name="font">
+                      <font>
+                       <pointsize>13</pointsize>
+                       <bold>true</bold>
+                      </font>
+                     </property>
                      <property name="text">
-                      <string>Всего к повторению: 0</string>
+                      <string>Информация о карточках:</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="quantity_allCardsLabel">
+                     <property name="text">
+                      <string>Всего: 0</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="quantity_repetitionCardsLabel">
+                     <property name="text">
+                      <string>Готовы к повторению: 0</string>
                      </property>
                     </widget>
                    </item>

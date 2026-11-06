@@ -1,0 +1,122 @@
+/* Основной фон */
+QMainWindow, QDialog {
+    background-color: #191A23;
+}
+
+/* Общие виджеты */
+QWidget {
+    color: #E7E7F0;
+}
+
+/* Заголовки */
+QLabel {
+    background: transparent;
+}
+
+/* Кнопки */
+QPushButton {
+    background-color: #292A37;
+    border: 1px solid #393A49;
+    border-radius: 8px;
+    padding: 5px 12px;
+    color: #E7E7F0;
+}
+
+QPushButton:hover {
+    background-color: #383248;
+    border-color: #9077E8;
+}
+
+QPushButton:pressed {
+    background-color: #453B61;
+}
+
+/* Поля ввода */
+QLineEdit, QTextEdit, QPlainTextEdit {
+    background-color: #242530;
+    border: 1px solid #393A49;
+    border-radius: 8px;
+    padding: 9px;
+    selection-background-color: #7558D9;
+}
+
+QLineEdit:focus, QTextEdit:focus {
+    border: 1px solid #9077E8;
+}
+
+/* Выпадающие списки */
+QComboBox {
+    background-color: #242530;
+    border: 1px solid #393A49;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+QComboBox:hover {
+    border-color: #9077E8;
+}
+
+QComboBox::drop-down {
+    background-color: #292A37;
+    border: none;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    width: 28px;
+}
+
+QComboBox::drop-down:hover {
+    background-color: #383248;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #242530;
+    color: #E7E7F0;
+    border: 1px solid #393A49;
+    selection-background-color: #453B61;
+    selection-color: white;
+    outline: none;
+}
+
+/* Таблицы */
+QTableWidget {
+    background-color: #242530;
+    border: 1px solid #393A49;
+    border-radius: 10px;
+    gridline-color: #393A49;
+    selection-background-color: #453B61;
+    selection-color: white;
+}
+
+QHeaderView {
+    background-color: #2D2E3C;
+}
+
+QHeaderView::section {
+    background-color: #2D2E3C;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* Скроллбары */
+QScrollBar:vertical {
+    background: transparent;
+    width: 8px;
+    margin: 0;
+}
+
+QScrollBar::handle:vertical {
+    background: #555365;
+    border-radius: 4px;
+    min-height: 25px;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0;
+}
+
+QTableCornerButton::section {
+    background-color: #2D2E3C;
+    border: none;
+}
