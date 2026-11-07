@@ -2,6 +2,7 @@ import sys
 from PyQt6 import uic
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtCore import QTimer
+from PyQt6.QtGui import QIcon, QPixmap
 from pages.cards_page import CardsPage
 from pages.study_pages import StudyPage
 from dialogs.settings_dialog import SettingsDialog
@@ -17,6 +18,13 @@ class MainWindow(QMainWindow):
         uic.loadUi("ui/main_window_page.ui", self)
         self.cardsPage = CardsPage()
         self.studyPage = StudyPage()
+
+        self.logoIconLabel.setPixmap(QIcon("icons/brain.svg").pixmap(30, 30))
+        self.homeIconLabel.setPixmap(QIcon("icons/house.svg").pixmap(30, 30))
+        self.cardsIconLabel.setPixmap(QIcon("icons/playing-cards-fan.svg").pixmap(30, 30))
+        self.studyIconLabel.setPixmap(QIcon("icons/book-open.svg").pixmap(30, 30))
+        self.statsIconLabel.setPixmap(QIcon("icons/trending-up.svg").pixmap(30, 30))
+        self.settingsIconLabel.setPixmap(QIcon("icons/settings.svg").pixmap(30, 30))
 
         self.cardsPage.cards_changed.connect(self.studyPage.refresh_page)
         self.cardsPage.cards_changed.connect(self.fill_information_about_cards)
