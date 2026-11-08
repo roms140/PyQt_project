@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QMainWindow, QTextEdit
 from PyQt6 import uic
-from PyQt6.QtCore import pyqtSignal
-from PyQt6.QtGui import QTextOption
+from PyQt6.QtCore import pyqtSignal, Qt
+from PyQt6.QtGui import QTextOption, QPixmap
 from database.queries import get_all_cards, get_cards_for_repetition, add_review_history, update_card_review
 
 
@@ -12,6 +12,11 @@ class StudyPage(QMainWindow):
         super().__init__()
 
         uic.loadUi("ui/study_page.ui", self)
+
+        self.verticalLayout_2.setAlignment(
+            self.imageLabel,
+            Qt.AlignmentFlag.AlignHCenter
+        )
 
         self.answerTextEdit.setLineWrapMode(
             QTextEdit.LineWrapMode.WidgetWidth
@@ -72,6 +77,7 @@ class StudyPage(QMainWindow):
             self.progressLabel.setText("")
             self.refresh_page()
             return
+        self.imageLabel.hide()
         self.progressLabel.setText(
             f"Карточка {self.current_card_index + 1} из {len(self.cards_for_repetition)}")
         self.showAnswerButton.setEnabled(True)
@@ -80,6 +86,13 @@ class StudyPage(QMainWindow):
         self.questionLabel.setText(self.current_card[1])
         self.answerTextEdit.setPlainText(self.current_card[2])
         self.categoryLabel.setText(self.current_card[3])
+        image = self.current_card[4]
+        if image:
+            pixmap = QPixmap()
+            pixmap.loadFromData(image)
+            self.imageLabel.setPixmap(pixmap.scaled(
+                self.imageLabel.size(), Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))
+            self.imageLabel.show()
 
         # Скрываем ответ и оценки перед отображением следующей карточки
         self.answerTextEdit.hide()
