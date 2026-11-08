@@ -2,7 +2,7 @@ import sys
 from PyQt6 import uic
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtCore import QTimer
-from PyQt6.QtGui import QIcon, QPixmap
+from PyQt6.QtGui import QIcon
 from pages.cards_page import CardsPage
 from pages.study_pages import StudyPage
 from dialogs.settings_dialog import SettingsDialog

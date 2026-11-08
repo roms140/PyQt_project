@@ -2,15 +2,15 @@ from database.db import get_connection
 from datetime import datetime, timedelta
 
 
-def add_card(question, answer, category):
+def add_card(question, answer, category, image_data):
     con = get_connection()
     cur = con.cursor()
     now = datetime.now()
     created_at = now.isoformat(timespec="seconds")
     request = """INSERT INTO cards (question, answer, category, 
-    created_at, next_review_at, interval_minutes)
-    VALUES (?, ?, ?, ?, ?, ?)"""
-    cur.execute(request, (question, answer, category, created_at, created_at, 0))
+    created_at, next_review_at, interval_minutes, image)
+    VALUES (?, ?, ?, ?, ?, ?, ?)"""
+    cur.execute(request, (question, answer, category, created_at, created_at, 0, image_data))
     con.commit()
     con.close()
 
@@ -33,7 +33,7 @@ def get_data_card(card_id):
     cur = con.cursor()
 
     card = cur.execute(
-        "SELECT question, answer, category FROM cards WHERE id = ?", (card_id,)).fetchone()
+        "SELECT question, answer, category, image FROM cards WHERE id = ?", (card_id,)).fetchone()
 
     con.close()
     return card
@@ -46,7 +46,7 @@ def get_cards_for_repetition():
     now = datetime.now()
     current_date = now.isoformat(timespec="seconds")
 
-    request = """SELECT id, question, answer, category, next_review_at 
+    request = """SELECT id, question, answer, category, image 
     FROM cards 
     WHERE next_review_at <= ?
     ORDER BY next_review_at ASC"""
@@ -85,11 +85,11 @@ def delete_card(card_id):
     con.close()
 
 
-def edit_card(card_id, question, answer, category):
+def edit_card(card_id, question, answer, category, image_data):
     con = get_connection()
     cur = con.cursor()
-    request = """UPDATE cards SET question = ?, answer = ?, category = ? WHERE id = ?"""
-    cur.execute(request, (question, answer, category, card_id))
+    request = """UPDATE cards SET question = ?, answer = ?, category = ?, image = ? WHERE id = ?"""
+    cur.execute(request, (question, answer, category, image_data, card_id))
     con.commit()
     con.close()
 

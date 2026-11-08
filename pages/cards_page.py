@@ -84,9 +84,9 @@ class CardsPage(QMainWindow):
     def add_card(self):
         dialog = CardDialog(self)
         if dialog.exec():
-            question, answer, category = dialog.card_data
+            question, answer, category, image_data = dialog.card_data
 
-            db_add_card(question, answer, category)
+            db_add_card(question, answer, category, image_data)
             self.load_cards(get_all_cards())
             self.load_categories()
             self.cards_changed.emit()
@@ -100,8 +100,8 @@ class CardsPage(QMainWindow):
             row, 0).data(Qt.ItemDataRole.UserRole)
         dialog = CardDialog(self, card_id)
         if dialog.exec():
-            question, answer, category = dialog.card_data
-            db_edit_card(card_id, question, answer, category)
+            question, answer, category, image_data = dialog.card_data
+            db_edit_card(card_id, question, answer, category, image_data)
             self.load_cards(get_all_cards())
             self.load_categories()
             self.cards_changed.emit()

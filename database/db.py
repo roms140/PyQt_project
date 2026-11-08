@@ -15,10 +15,11 @@ def create_tables():
     id INTEGER PRIMARY KEY AUTOINCREMENT, 
     question TEXT NOT NULL, 
     answer TEXT NOT NULL, 
-    category TEXT, 
+    category TEXT NOT NULL, 
     created_at TEXT, 
     next_review_at TEXT, 
-    interval_minutes INTEGER)""")
+    interval_minutes INTEGER, 
+    image BLOB)""")
 
     cur.execute("""CREATE TABLE IF NOT EXISTS review_history (
     id INTEGER PRIMARY KEY AUTOINCREMENT, 
