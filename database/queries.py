@@ -10,7 +10,8 @@ def add_card(question, answer, category, image_data):
     request = """INSERT INTO cards (question, answer, category, 
     created_at, next_review_at, interval_minutes, image)
     VALUES (?, ?, ?, ?, ?, ?, ?)"""
-    cur.execute(request, (question, answer, category, created_at, created_at, 0, image_data))
+    cur.execute(request, (question, answer, category,
+                created_at, created_at, 0, image_data))
     con.commit()
     con.close()
 
@@ -103,3 +104,45 @@ def update_card_review(card_id, interval_minutes):
     cur.execute(request, (next_review_at_iso, interval_minutes, card_id))
     con.commit()
     con.close()
+
+
+def get_cards_count():
+    con = get_connection()
+    cur = con.cursor()
+    count = cur.execute("SELECT COUNT(*) FROM cards").fetchone()[0]
+
+    con.close()
+    return count
+
+
+def get_reviews_count():
+    con = get_connection()
+    cur = con.cursor()
+    count = cur.execute("SELECT COUNT(*) FROM review_history").fetchone()[0]
+
+    con.close()
+    return count
+
+
+def get_today_reviews_count():
+    con = get_connection()
+    cur = con.cursor()
+
+    count = cur.execute("""SELECT COUNT(*)
+    FROM review_history 
+    WHERE DATE(reviewed_at) = DATE('now', 'localtime')""").fetchone()[0]
+
+    con.close()
+    return count
+
+
+def get_active_days():
+    con = get_connection()
+    cur = con.cursor()
+
+    days = cur.execute("""SELECT DISTINCT DATE(reviewed_at) 
+    FROM review_history 
+    ORDER BY DATE(reviewed_at)""").fetchall()
+
+    con.close()
+    return days

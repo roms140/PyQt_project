@@ -111,3 +111,59 @@ QTableCornerButton::section {
     background-color: #F0EFF6;
     border: none;
 }
+
+QProgressBar {
+    background-color: #EAEAF0;
+    border: 1px solid #DCDDE6;
+    border-radius: 6px;
+    text-align: center;
+    color: #252638;
+    height: 22px;
+}
+
+QProgressBar::chunk {
+    background-color: #7558D9;
+    border-radius: 5px;
+}
+
+QCalendarWidget QWidget {
+    background-color: #FFFFFF;
+    color: #252638;
+}
+
+QCalendarWidget QToolButton {
+    background-color: #F0EFF6;
+    color: #333449;
+    border: none;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+QCalendarWidget QToolButton:hover {
+    background-color: #E4DEFF;
+}
+
+QCalendarWidget QToolButton:pressed {
+    background-color: #D8CEFF;
+}
+
+QCalendarWidget QMenu {
+    background-color: #FFFFFF;
+    color: #252638;
+}
+
+QCalendarWidget QSpinBox {
+    background-color: #FFFFFF;
+    color: #252638;
+    border: 1px solid #E0E1EA;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+QCalendarWidget QAbstractItemView {
+    background-color: #FFFFFF;
+    color: #252638;
+    selection-background-color: #7558D9;
+    selection-color: #FFFFFF;
+    alternate-background-color: #F5F6FA;
+}
