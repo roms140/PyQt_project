@@ -1,9 +1,11 @@
-from PyQt6.QtWidgets import QMainWindow, QHeaderView, QTableWidgetItem, QAbstractItemView, QMessageBox
+from PyQt6.QtWidgets import QMainWindow, QHeaderView, QTableWidgetItem, QAbstractItemView, QMessageBox, QFileDialog
 from PyQt6 import uic
-from database.queries import add_card as db_add_card, get_all_cards, delete_card as db_delete_card, edit_card as db_edit_card, get_all_categories
+from database.queries import (add_card as db_add_card, get_all_cards, delete_card as db_delete_card,
+                              edit_card as db_edit_card, get_all_categories, get_cards_for_export)
 from datetime import datetime
 from dialogs.card_dialog import CardDialog
 from PyQt6.QtCore import Qt, pyqtSignal
+import csv
 
 
 class CardsPage(QMainWindow):
@@ -41,6 +43,7 @@ class CardsPage(QMainWindow):
         self.deleteButton.clicked.connect(self.delete_card)
         self.searchLineEdit.textChanged.connect(self.search_cards)
         self.categoryComboBox.currentTextChanged.connect(self.search_cards)
+        self.exportCardsButton.clicked.connect(self.export_cards)
 
         self.load_cards(get_all_cards())
         self.load_categories()
@@ -124,3 +127,38 @@ class CardsPage(QMainWindow):
             self.load_cards(get_all_cards())
             self.load_categories()
             self.cards_changed.emit()
+
+    def export_cards(self):
+        cards = get_cards_for_export()
+
+        if not cards:
+            QMessageBox.information(
+                self, "Экспорт карточек", "Нет карточек для экспорта.")
+            return
+
+        file_path, _ = QFileDialog.getSaveFileName(
+            self, "Сохранить карточки в CSV", "cards.csv", "CSV files (*.csv)")
+
+        if not file_path:
+            return
+
+        if not file_path.lower().endswith(".csv"):
+            file_path += ".csv"
+
+        fieldnames = ["question", "answer", "category"]
+        try:
+            with open(file_path, "w", newline="", encoding="utf-8-sig") as f:
+                writer = csv.DictWriter(f, fieldnames=fieldnames)
+                writer.writeheader()
+                for card in cards:
+                    writer.writerow(
+                        {"question": card[0], "answer": card[1], "category": card[2]})
+
+            QMessageBox.information(
+                self,
+                "Экспорт карточек",
+                f"Успешно экспортировано карточек: {len(cards)}"
+            )
+        except OSError:
+            QMessageBox.critical(self, "Ошибка экспорта",
+                                 "Не удалось сохранить файл")

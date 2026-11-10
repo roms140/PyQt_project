@@ -9,6 +9,7 @@ from pages.statistics_page import StatisticsPage
 from dialogs.settings_dialog import SettingsDialog
 from database.db import create_tables
 from database.queries import get_cards_count, get_cards_for_repetition, get_all_cards
+from collections import Counter
 
 
 class MainWindow(QMainWindow):
@@ -35,10 +36,14 @@ class MainWindow(QMainWindow):
         self.cardsPage.cards_changed.connect(self.studyPage.refresh_page)
         self.cardsPage.cards_changed.connect(self.fill_information_about_cards)
         self.cardsPage.cards_changed.connect(self.statisticsPage.update_data)
+        self.cardsPage.cards_changed.connect(
+            self.fill_information_about_nearest_repetitions)
         self.studyPage.cards_changed.connect(
             lambda: self.cardsPage.load_cards(get_all_cards()))
         self.studyPage.cards_changed.connect(self.fill_information_about_cards)
         self.studyPage.cards_changed.connect(self.statisticsPage.update_data)
+        self.studyPage.cards_changed.connect(
+            self.fill_information_about_nearest_repetitions)
 
         self.stackedWidget.addWidget(self.cardsPage)
         self.stackedWidget.addWidget(self.studyPage)
@@ -65,10 +70,11 @@ class MainWindow(QMainWindow):
         self.settingsDialog = SettingsDialog(self)
         self.settingsButton.clicked.connect(self.settingsDialog.exec)
 
-        self.fill_information_about_cards()
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update_data)
         self.timer.start(60 * 1000)
+        self.fill_information_about_cards()
+        self.fill_information_about_nearest_repetitions()
 
     def fill_information_about_cards(self):
         count_all_cards = get_cards_count()
@@ -80,6 +86,37 @@ class MainWindow(QMainWindow):
     def update_data(self):
         self.fill_information_about_cards()
         self.studyPage.check_for_new_cards()
+
+    def fill_information_about_nearest_repetitions(self):
+        self.firtstCardCategoryLabel.show()
+        self.secondCardCategoryLabel.show()
+        self.thirdCardCategoryLabel.show()
+        self.noRepetitionsLabel.hide()
+        self.firtstCardCategoryLabel.clear()
+        self.secondCardCategoryLabel.clear()
+        self.thirdCardCategoryLabel.clear()
+
+        cards = get_cards_for_repetition()
+        category_counts = Counter(card[3].lower()
+                                  for card in cards).most_common()
+
+        if not category_counts:
+            self.firtstCardCategoryLabel.hide()
+            self.secondCardCategoryLabel.hide()
+            self.thirdCardCategoryLabel.hide()
+            self.noRepetitionsLabel.show()
+            self.noRepetitionsLabel.setText("Пока нет карточек для повторения")
+            return
+
+        for i, category_count in enumerate(category_counts[:3], start=1):
+            category = category_count[0].capitalize()
+            value = category_count[1]
+            if i == 1:
+                self.firtstCardCategoryLabel.setText(f"{category}: {value}")
+            elif i == 2:
+                self.secondCardCategoryLabel.setText(f"{category}: {value}")
+            elif i == 3:
+                self.thirdCardCategoryLabel.setText(f"{category}: {value}")
 
 
 if __name__ == '__main__':

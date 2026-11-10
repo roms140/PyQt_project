@@ -364,6 +364,11 @@
                   <layout class="QVBoxLayout" name="verticalLayout_4">
                    <item>
                     <widget class="QLabel" name="welcomeLabel">
+                     <property name="font">
+                      <font>
+                       <pointsize>13</pointsize>
+                      </font>
+                     </property>
                      <property name="text">
                       <string>Добро пожаловать!</string>
                      </property>
@@ -384,6 +389,11 @@
                    </item>
                    <item>
                     <widget class="QLabel" name="welcomeDescription">
+                     <property name="font">
+                      <font>
+                       <pointsize>11</pointsize>
+                      </font>
+                     </property>
                      <property name="text">
                       <string>Самое время освежить знания и закрепить материал.</string>
                      </property>
@@ -406,18 +416,80 @@
                   <property name="frameShadow">
                    <enum>QFrame::Shadow::Raised</enum>
                   </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_5" stretch="3,1,0,0,1">
+                  <layout class="QVBoxLayout" name="verticalLayout_5" stretch="4,0,1,0,0,1">
                    <item>
-                    <widget class="QLabel" name="reviewsTitle">
-                     <property name="font">
-                      <font>
-                       <pointsize>18</pointsize>
-                       <italic>false</italic>
-                       <bold>true</bold>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Ближайшие повторения</string>
+                    <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,0,0,0,0">
+                     <item>
+                      <widget class="QLabel" name="nearestRepetitionsLabel">
+                       <property name="font">
+                        <font>
+                         <pointsize>15</pointsize>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>Ближайшие повторения:</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="firtstCardCategoryLabel">
+                       <property name="font">
+                        <font>
+                         <pointsize>12</pointsize>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>TextLabel</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="secondCardCategoryLabel">
+                       <property name="font">
+                        <font>
+                         <pointsize>12</pointsize>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>TextLabel</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="thirdCardCategoryLabel">
+                       <property name="font">
+                        <font>
+                         <pointsize>12</pointsize>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>TextLabel</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="noRepetitionsLabel">
+                       <property name="font">
+                        <font>
+                         <pointsize>15</pointsize>
+                         <bold>true</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <widget class="Line" name="line">
+                     <property name="orientation">
+                      <enum>Qt::Orientation::Horizontal</enum>
                      </property>
                     </widget>
                    </item>

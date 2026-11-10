@@ -68,6 +68,16 @@ def get_all_cards():
     return cards
 
 
+def get_cards_for_export():
+    con = get_connection()
+    cur = con.cursor()
+
+    cards = cur.execute("SELECT question, answer, category FROM cards ORDER BY next_review_at").fetchall()
+
+    con.close()
+    return cards
+
+
 def get_all_categories():
     con = get_connection()
     cur = con.cursor()
