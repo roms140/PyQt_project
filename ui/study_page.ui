@@ -104,9 +104,15 @@
        </item>
        <item>
         <widget class="QLabel" name="questionLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="font">
           <font>
-           <pointsize>22</pointsize>
+           <pointsize>18</pointsize>
            <bold>true</bold>
           </font>
          </property>
@@ -151,6 +157,12 @@
        </item>
        <item>
         <widget class="QLabel" name="categoryLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="font">
           <font>
            <pointsize>10</pointsize>
@@ -162,6 +174,9 @@
          </property>
          <property name="alignment">
           <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
          </property>
         </widget>
        </item>

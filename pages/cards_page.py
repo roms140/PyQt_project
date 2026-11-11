@@ -22,7 +22,7 @@ class CardsPage(QMainWindow):
         header = self.cardsTableWidget.horizontalHeader()
 
         header.setSectionResizeMode(0, QHeaderView.ResizeMode.Interactive)
-        header.setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
+        header.setSectionResizeMode(1, QHeaderView.ResizeMode.Interactive)
         header.setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
         self.cardsTableWidget.setColumnWidth(0, 400)
 

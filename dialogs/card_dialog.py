@@ -12,6 +12,9 @@ class CardDialog(QDialog):
 
         self.imageLabel.setPixmap(QIcon("icons/image-plus.svg").pixmap(65, 65))
 
+        self.questionLineEdit.setMaxLength(100)
+        self.categoryLineEdit.setMaxLength(40)
+
         self.saveButton.clicked.connect(self.save_card)
         self.chooseImageButton.clicked.connect(self.choose_image)
         self.deleteImageButton.clicked.connect(self.delete_image)
