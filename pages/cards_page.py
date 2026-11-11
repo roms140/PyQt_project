@@ -44,6 +44,7 @@ class CardsPage(QMainWindow):
         self.searchLineEdit.textChanged.connect(self.search_cards)
         self.categoryComboBox.currentTextChanged.connect(self.search_cards)
         self.exportCardsButton.clicked.connect(self.export_cards)
+        self.importCardsButton.clicked.connect(self.import_cards)
 
         self.load_cards(get_all_cards())
         self.load_categories()
@@ -159,6 +160,56 @@ class CardsPage(QMainWindow):
                 "Экспорт карточек",
                 f"Успешно экспортировано карточек: {len(cards)}"
             )
-        except OSError:
+        except OSError as e:
             QMessageBox.critical(self, "Ошибка экспорта",
-                                 "Не удалось сохранить файл")
+                                 f"Не удалось сохранить файл:\n{e}")
+
+    def import_cards(self):
+        file_path, _ = QFileDialog.getOpenFileName(
+            self, "Выберите CSV-файл", "", "CSV files (*.csv)")
+
+        if not file_path:
+            return
+
+        try:
+            with open(file_path, "r", newline="", encoding="utf-8-sig") as f:
+                reader = csv.DictReader(f)
+
+                expected_headers = ["question", "answer", "category"]
+                if reader.fieldnames != expected_headers:
+                    QMessageBox.warning(
+                        self, "Ошибка импорта", "Неверный формат CSV-файла.")
+                    return
+
+                rows = list(reader)
+
+                if not rows:
+                    QMessageBox.warning(
+                        self, "Ошибка импорта", "В файле отсутствуют карточки")
+                    return
+
+                for row_number, row in enumerate(rows, start=2):
+                    for key in expected_headers:
+                        if not (row[key] or "").strip():
+                            QMessageBox.warning(
+                                self, "Ошибка импорта", f"В строке {row_number} есть пустые поля.")
+                            return
+
+                for row in rows:
+                    db_add_card(row["question"].strip(),
+                                row["answer"].strip(),
+                                row["category"].strip(),
+                                None)
+                self.load_cards(get_all_cards())
+                self.load_categories()
+                self.cards_changed.emit()
+
+                QMessageBox.information(
+                    self,
+                    "Импорт карточек",
+                    f"Успешно импортировано карточек: {len(rows)}"
+                )
+
+        except (OSError, UnicodeDecodeError, csv.Error) as e:
+            QMessageBox.critical(self, "Ошибка импорта",
+                                 f"Не удалось прочитать CSV файл:\n{e}")

@@ -74,3 +74,4 @@ class CardDialog(QDialog):
         self.imageLabel.setPixmap(QIcon("icons/image-plus.svg").pixmap(65, 65))
         self.image_data = None
         self.deleteImageButton.hide()
+
