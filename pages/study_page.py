@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QMainWindow, QTextEdit
 from PyQt6 import uic
 from PyQt6.QtCore import pyqtSignal, Qt
 from PyQt6.QtGui import QTextOption, QPixmap
+from paths import resource_path
 from database.queries import get_all_cards, get_cards_for_repetition, add_review_history, update_card_review
 
 
@@ -11,7 +12,7 @@ class StudyPage(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        uic.loadUi("ui/study_page.ui", self)
+        uic.loadUi(str(resource_path("ui/study_page.ui")), self)
 
         self.verticalLayout_2.setAlignment(
             self.imageLabel,

@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QCalendarWidget
 from PyQt6 import uic
 from database.queries import get_reviews_count, get_cards_count, get_today_reviews_count, get_active_days
+from paths import resource_path
 from PyQt6.QtCore import QDate
 from PyQt6.QtGui import QTextCharFormat, QColor
 
@@ -9,7 +10,7 @@ class StatisticsPage(QWidget):
     def __init__(self):
         super().__init__()
 
-        uic.loadUi("ui/statistics_page.ui", self)
+        uic.loadUi(str(resource_path("ui/statistics_page.ui")), self)
         self.calendarWidget.setVerticalHeaderFormat(
             QCalendarWidget.VerticalHeaderFormat.NoVerticalHeader
         )

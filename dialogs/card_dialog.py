@@ -2,15 +2,17 @@ from PyQt6.QtWidgets import QDialog, QMessageBox, QFileDialog
 from PyQt6 import uic
 from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtCore import Qt
+from paths import resource_path
 from database.queries import get_data_card as db_get_data_card
 
 
 class CardDialog(QDialog):
     def __init__(self, parent=None, id_card=None):
         super().__init__(parent)
-        uic.loadUi("ui/card_dialog.ui", self)
+        uic.loadUi(str(resource_path("ui/card_dialog.ui")), self)
 
-        self.imageLabel.setPixmap(QIcon("icons/image-plus.svg").pixmap(65, 65))
+        self.imageLabel.setPixmap(
+            QIcon(str(resource_path("icons/image-plus.svg"))).pixmap(65, 65))
 
         self.questionLineEdit.setMaxLength(100)
         self.categoryLineEdit.setMaxLength(40)
@@ -77,4 +79,3 @@ class CardDialog(QDialog):
         self.imageLabel.setPixmap(QIcon("icons/image-plus.svg").pixmap(65, 65))
         self.image_data = None
         self.deleteImageButton.hide()
-

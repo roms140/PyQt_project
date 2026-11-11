@@ -4,6 +4,7 @@ from database.queries import (add_card as db_add_card, get_all_cards, delete_car
                               edit_card as db_edit_card, get_all_categories, get_cards_for_export)
 from datetime import datetime
 from dialogs.card_dialog import CardDialog
+from paths import resource_path
 from PyQt6.QtCore import Qt, pyqtSignal
 import csv
 
@@ -14,7 +15,7 @@ class CardsPage(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        uic.loadUi("ui/cards_page.ui", self)
+        uic.loadUi(str(resource_path("ui/cards_page.ui")), self)
 
         # Настройка таблицы
         self.cardsTableWidget.setHorizontalHeaderLabels(

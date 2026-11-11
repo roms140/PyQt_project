@@ -9,6 +9,7 @@ from pages.statistics_page import StatisticsPage
 from dialogs.settings_dialog import SettingsDialog
 from database.db import create_tables
 from database.queries import get_cards_count, get_cards_for_repetition, get_all_cards
+from paths import resource_path
 from collections import Counter
 
 
@@ -17,21 +18,23 @@ class MainWindow(QMainWindow):
         super().__init__()
         create_tables()
 
-        uic.loadUi("ui/main_window_page.ui", self)
+        uic.loadUi(str(resource_path("ui/main_window_page.ui")), self)
         self.cardsPage = CardsPage()
         self.studyPage = StudyPage()
         self.statisticsPage = StatisticsPage()
 
-        self.logoIconLabel.setPixmap(QIcon("icons/brain.svg").pixmap(30, 30))
-        self.homeIconLabel.setPixmap(QIcon("icons/house.svg").pixmap(30, 30))
+        self.logoIconLabel.setPixmap(
+            QIcon(str(resource_path("icons/brain.svg"))).pixmap(30, 30))
+        self.homeIconLabel.setPixmap(
+            QIcon(str(resource_path("icons/house.svg"))).pixmap(30, 30))
         self.cardsIconLabel.setPixmap(
-            QIcon("icons/playing-cards-fan.svg").pixmap(30, 30))
+            QIcon(str(resource_path("icons/playing-cards-fan.svg"))).pixmap(30, 30))
         self.studyIconLabel.setPixmap(
-            QIcon("icons/book-open.svg").pixmap(30, 30))
+            QIcon(str(resource_path("icons/book-open.svg"))).pixmap(30, 30))
         self.statsIconLabel.setPixmap(
-            QIcon("icons/trending-up.svg").pixmap(30, 30))
+            QIcon(str(resource_path("icons/trending-up.svg"))).pixmap(30, 30))
         self.settingsIconLabel.setPixmap(
-            QIcon("icons/settings.svg").pixmap(30, 30))
+            QIcon(str(resource_path("icons/settings.svg"))).pixmap(30, 30))
 
         self.cardsPage.cards_changed.connect(self.studyPage.refresh_page)
         self.cardsPage.cards_changed.connect(self.fill_information_about_cards)
