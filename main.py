@@ -35,6 +35,9 @@ class MainWindow(QMainWindow):
             QIcon(str(resource_path("icons/trending-up.svg"))).pixmap(30, 30))
         self.settingsIconLabel.setPixmap(
             QIcon(str(resource_path("icons/settings.svg"))).pixmap(30, 30))
+        self.imageTotalCardsLabel.setPixmap(QIcon(str(resource_path("icons/wallet-cards.svg"))).pixmap(32, 32))
+        self.imageRepetitionCardsLabel.setPixmap(QIcon(str(resource_path("icons/clock.svg"))).pixmap(32, 32))
+        self.imageNoRepetitionsLabel.setPixmap(QIcon(str(resource_path("icons/calendar-check.svg"))).pixmap(30, 30))
 
         self.cardsPage.cards_changed.connect(self.studyPage.refresh_page)
         self.cardsPage.cards_changed.connect(self.fill_information_about_cards)
@@ -82,9 +85,8 @@ class MainWindow(QMainWindow):
     def fill_information_about_cards(self):
         count_all_cards = get_cards_count()
         cards_for_repetition = get_cards_for_repetition()
-        self.quantity_allCardsLabel.setText(f"Всего: {count_all_cards}")
-        self.quantity_repetitionCardsLabel.setText(
-            f"Готовы к повторению: {len(cards_for_repetition)}")
+        self.totalCardsValueLabel.setText(f"{count_all_cards}")
+        self.repetitionCardsValueLabel.setText(f"{len(cards_for_repetition)}")
 
     def update_data(self):
         self.fill_information_about_cards()
@@ -94,6 +96,7 @@ class MainWindow(QMainWindow):
         self.firtstCardCategoryLabel.show()
         self.secondCardCategoryLabel.show()
         self.thirdCardCategoryLabel.show()
+        self.imageNoRepetitionsLabel.hide()
         self.noRepetitionsLabel.hide()
         self.firtstCardCategoryLabel.clear()
         self.secondCardCategoryLabel.clear()
@@ -107,8 +110,9 @@ class MainWindow(QMainWindow):
             self.firtstCardCategoryLabel.hide()
             self.secondCardCategoryLabel.hide()
             self.thirdCardCategoryLabel.hide()
+            self.imageNoRepetitionsLabel.show()
             self.noRepetitionsLabel.show()
-            self.noRepetitionsLabel.setText("Пока нет карточек для повторения")
+            self.noRepetitionsLabel.setText("Нет карточек для повторения")
             return
 
         for i, category_count in enumerate(category_counts[:3], start=1):

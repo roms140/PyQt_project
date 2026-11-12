@@ -330,7 +330,7 @@
                <property name="frameShadow">
                 <enum>QFrame::Shadow::Raised</enum>
                </property>
-               <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,3,7">
+               <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,1,10">
                 <item>
                  <widget class="QLabel" name="titleLabel">
                   <property name="font">
@@ -366,24 +366,12 @@
                     <widget class="QLabel" name="welcomeLabel">
                      <property name="font">
                       <font>
-                       <pointsize>13</pointsize>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Добро пожаловать!</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="welcomeTitle">
-                     <property name="font">
-                      <font>
-                       <pointsize>18</pointsize>
+                       <pointsize>17</pointsize>
                        <bold>true</bold>
                       </font>
                      </property>
                      <property name="text">
-                      <string>Пора повторять</string>
+                      <string>Добро пожаловать в Recall!</string>
                      </property>
                     </widget>
                    </item>
@@ -416,9 +404,122 @@
                   <property name="frameShadow">
                    <enum>QFrame::Shadow::Raised</enum>
                   </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_5" stretch="4,0,1,0,0,1">
+                  <layout class="QVBoxLayout" name="verticalLayout_5" stretch="1,1,0,0">
                    <item>
-                    <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,0,0,0,0">
+                    <widget class="QFrame" name="statsFrame">
+                     <property name="frameShape">
+                      <enum>QFrame::Shape::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Shadow::Raised</enum>
+                     </property>
+                     <layout class="QHBoxLayout" name="horizontalLayout_5">
+                      <property name="spacing">
+                       <number>15</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="imageTotalCardsLabel">
+                        <property name="minimumSize">
+                         <size>
+                          <width>32</width>
+                          <height>32</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>32</width>
+                          <height>32</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <layout class="QVBoxLayout" name="verticalLayout_9">
+                        <item>
+                         <widget class="QLabel" name="totalCardsValueLabel">
+                          <property name="font">
+                           <font>
+                            <pointsize>14</pointsize>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>0</string>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="totalCardsTextLabel">
+                          <property name="text">
+                           <string>Всего карточек</string>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="imageRepetitionCardsLabel">
+                        <property name="minimumSize">
+                         <size>
+                          <width>32</width>
+                          <height>32</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>32</width>
+                          <height>32</height>
+                         </size>
+                        </property>
+                        <property name="text">
+                         <string/>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <layout class="QVBoxLayout" name="verticalLayout_10">
+                        <item>
+                         <widget class="QLabel" name="repetitionCardsValueLabel">
+                          <property name="font">
+                           <font>
+                            <pointsize>14</pointsize>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>0</string>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="repetitionCardsTextLabel">
+                          <property name="text">
+                           <string>К повторению</string>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,0,0,0,0,0">
                      <item>
                       <widget class="QLabel" name="nearestRepetitionsLabel">
                        <property name="font">
@@ -441,7 +542,7 @@
                         </font>
                        </property>
                        <property name="text">
-                        <string>TextLabel</string>
+                        <string/>
                        </property>
                       </widget>
                      </item>
@@ -454,7 +555,7 @@
                         </font>
                        </property>
                        <property name="text">
-                        <string>TextLabel</string>
+                        <string/>
                        </property>
                       </widget>
                      </item>
@@ -467,9 +568,58 @@
                         </font>
                        </property>
                        <property name="text">
-                        <string>TextLabel</string>
+                        <string/>
                        </property>
                       </widget>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_10">
+                       <item>
+                        <spacer name="horizontalSpacer">
+                         <property name="orientation">
+                          <enum>Qt::Orientation::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="imageNoRepetitionsLabel">
+                         <property name="minimumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>30</width>
+                           <height>30</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string/>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="horizontalSpacer_2">
+                         <property name="orientation">
+                          <enum>Qt::Orientation::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
                      </item>
                      <item>
                       <widget class="QLabel" name="noRepetitionsLabel">
@@ -482,6 +632,9 @@
                        <property name="text">
                         <string/>
                        </property>
+                       <property name="alignment">
+                        <set>Qt::AlignmentFlag::AlignCenter</set>
+                       </property>
                       </widget>
                      </item>
                     </layout>
@@ -490,36 +643,6 @@
                     <widget class="Line" name="line">
                      <property name="orientation">
                       <enum>Qt::Orientation::Horizontal</enum>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="informationLabel">
-                     <property name="font">
-                      <font>
-                       <pointsize>13</pointsize>
-                       <bold>true</bold>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Информация о карточках:</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="quantity_allCardsLabel">
-                     <property name="text">
-                      <string>Всего: 0</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="quantity_repetitionCardsLabel">
-                     <property name="text">
-                      <string>Готовы к повторению: 0</string>
                      </property>
                     </widget>
                    </item>

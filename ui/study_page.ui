@@ -199,6 +199,11 @@
        </item>
        <item>
         <widget class="QTextEdit" name="answerTextEdit">
+         <property name="font">
+          <font>
+           <pointsize>13</pointsize>
+          </font>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>
