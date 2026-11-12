@@ -35,9 +35,12 @@ class MainWindow(QMainWindow):
             QIcon(str(resource_path("icons/trending-up.svg"))).pixmap(30, 30))
         self.settingsIconLabel.setPixmap(
             QIcon(str(resource_path("icons/settings.svg"))).pixmap(30, 30))
-        self.imageTotalCardsLabel.setPixmap(QIcon(str(resource_path("icons/wallet-cards.svg"))).pixmap(32, 32))
-        self.imageRepetitionCardsLabel.setPixmap(QIcon(str(resource_path("icons/clock.svg"))).pixmap(32, 32))
-        self.imageNoRepetitionsLabel.setPixmap(QIcon(str(resource_path("icons/calendar-check.svg"))).pixmap(30, 30))
+        self.imageTotalCardsLabel.setPixmap(
+            QIcon(str(resource_path("icons/wallet-cards.svg"))).pixmap(32, 32))
+        self.imageRepetitionCardsLabel.setPixmap(
+            QIcon(str(resource_path("icons/clock.svg"))).pixmap(32, 32))
+        self.imageNoRepetitionsLabel.setPixmap(
+            QIcon(str(resource_path("icons/calendar-check.svg"))).pixmap(30, 30))
 
         self.cardsPage.cards_changed.connect(self.studyPage.refresh_page)
         self.cardsPage.cards_changed.connect(self.fill_information_about_cards)
