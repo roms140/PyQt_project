@@ -26,6 +26,10 @@ class StudyPage(QMainWindow):
         self.answerTextEdit.setWordWrapMode(
             QTextOption.WrapMode.WrapAnywhere
         )
+        self.againButton.setToolTip("Не помню ответ. Повторить через 10 минут")
+        self.hardButton.setToolTip("Вспомнил с трудом. Повторить через 1 день")
+        self.goodButton.setToolTip("Вспомнил. Повторить через 3 дня")
+        self.easyButton.setToolTip("Легко вспомнил. Повторить через 7 дней")
 
         self.showAnswerButton.clicked.connect(self.show_answer)
         self.againButton.clicked.connect(lambda: self.next_card("again"))

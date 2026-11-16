@@ -6,6 +6,7 @@ from datetime import datetime
 from dialogs.card_dialog import CardDialog
 from paths import resource_path
 from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtGui import QShortcut, QKeySequence
 import csv
 
 
@@ -16,6 +17,19 @@ class CardsPage(QMainWindow):
         super().__init__()
 
         uic.loadUi(str(resource_path("ui/cards_page.ui")), self)
+
+        shortcut_add_card = QShortcut(QKeySequence("Ctrl+N"), self)
+        shortcut_add_card.activated.connect(self.add_card)
+        shortcut_export_cards = QShortcut(QKeySequence("Ctrl+E"), self)
+        shortcut_export_cards.activated.connect(self.export_cards)
+        shortcut_import_cards = QShortcut(QKeySequence("Ctrl+I"), self)
+        shortcut_import_cards.activated.connect(self.import_cards)
+        shortcut_delete_card = QShortcut(QKeySequence("Delete"), self)
+        shortcut_delete_card.activated.connect(self.delete_card)
+        shortcut_edit_card = QShortcut(QKeySequence("Ctrl+R"), self)
+        shortcut_edit_card.activated.connect(self.edit_card)
+        shortcut_search_cards = QShortcut(QKeySequence("Ctrl+F"), self)
+        shortcut_search_cards.activated.connect(self.searchLineEdit.setFocus)
 
         # Настройка таблицы
         self.cardsTableWidget.setHorizontalHeaderLabels(
@@ -38,6 +52,14 @@ class CardsPage(QMainWindow):
         self.cardsTableWidget.setEditTriggers(
             QAbstractItemView.EditTrigger.NoEditTriggers
         )
+
+        self.addButton.setToolTip("Создать новую карточку (Ctrl+N)")
+        self.exportCardsButton.setToolTip("Экспортировать карточки (Ctrl+E)")
+        self.importCardsButton.setToolTip("Импортировать карточки (Ctrl+I)")
+        self.deleteButton.setToolTip("Удалить выделенную карточку (Delete)")
+        self.editButton.setToolTip("Отредактировать выделенную карточку (Ctrl+R)")
+        self.searchLineEdit.setToolTip("Поиск карточек (Ctrl+F)")
+        self.categoryComboBox.setToolTip("Показать карточки выбранной категории")
 
         self.addButton.clicked.connect(self.add_card)
         self.editButton.clicked.connect(self.edit_card)
