@@ -1,7 +1,7 @@
 import sys
 from PyQt6 import uic
 from PyQt6.QtWidgets import QApplication, QMainWindow
-from PyQt6.QtCore import QTimer
+from PyQt6.QtCore import QTimer, QSettings
 from PyQt6.QtGui import QIcon
 from pages.cards_page import CardsPage
 from pages.study_page import StudyPage
@@ -19,9 +19,14 @@ class MainWindow(QMainWindow):
         create_tables()
 
         uic.loadUi(str(resource_path("ui/main_window_page.ui")), self)
+        self.settings = QSettings("Recall", "Recall")
         self.cardsPage = CardsPage()
         self.studyPage = StudyPage()
         self.statisticsPage = StatisticsPage()
+        self.settingsDialog = SettingsDialog(self)
+
+        goal = self.settings.value("daily_goal", 20, type=int)
+        self.statisticsPage.update_daily_goal(goal)
 
         self.logoIconLabel.setPixmap(
             QIcon(str(resource_path("icons/brain.svg"))).pixmap(30, 30))
@@ -53,6 +58,7 @@ class MainWindow(QMainWindow):
         self.studyPage.cards_changed.connect(self.statisticsPage.update_data)
         self.studyPage.cards_changed.connect(
             self.fill_information_about_nearest_repetitions)
+        self.settingsDialog.goal_changed.connect(self.change_daily_goal)
 
         self.stackedWidget.addWidget(self.cardsPage)
         self.stackedWidget.addWidget(self.studyPage)
@@ -76,7 +82,6 @@ class MainWindow(QMainWindow):
         self.startStudyButton.clicked.connect(
             lambda: self.stackedWidget.setCurrentIndex(2))
 
-        self.settingsDialog = SettingsDialog(self)
         self.settingsButton.clicked.connect(self.settingsDialog.exec)
 
         self.timer = QTimer(self)
@@ -127,6 +132,10 @@ class MainWindow(QMainWindow):
                 self.secondCardCategoryLabel.setText(f"{category}: {value}")
             elif i == 3:
                 self.thirdCardCategoryLabel.setText(f"{category}: {value}")
+
+    def change_daily_goal(self, goal):
+        self.settings.setValue("daily_goal", goal)
+        self.statisticsPage.update_daily_goal(goal)
 
 
 if __name__ == '__main__':

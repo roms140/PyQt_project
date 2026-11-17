@@ -167,3 +167,25 @@ QCalendarWidget QAbstractItemView {
     selection-color: #FFFFFF;
     alternate-background-color: #F5F6FA;
 }
+
+QListWidget {
+    background-color: #FFFFFF;
+    color: #222222;
+    border: 1px solid #DDDDDD;
+    border-radius: 6px;
+    outline: none;
+}
+
+QListWidget::item {
+    border-radius: 4px;
+}
+
+QListWidget::item:hover {
+    background-color: #F0F0F0;
+}
+
+QListWidget::item:selected {
+    background-color: #E2E2E2;
+    color: #222222;
+}
+

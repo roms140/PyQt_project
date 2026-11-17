@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>400</height>
+    <height>570</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Настройки</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,2,4">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,2,0,0,4">
    <item>
     <widget class="QLabel" name="titleLabel">
      <property name="font">
@@ -97,6 +97,54 @@
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Выбрать дневную цель(по умолчанию 20)</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QRadioButton" name="radioButton10">
+       <property name="text">
+        <string>10</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton20">
+       <property name="text">
+        <string>20</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton30">
+       <property name="text">
+        <string>30</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton40">
+       <property name="text">
+        <string>40</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QFrame" name="about_programFrame">
      <property name="frameShape">
       <enum>QFrame::Shape::StyledPanel</enum>
@@ -119,26 +167,68 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="recallLabel">
-        <property name="font">
-         <font>
-          <pointsize>11</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Recall</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="description_programLabel">
-        <property name="text">
-         <string>Приложение для эффективного запоминания информации с помощью карточек и интервального повторения.</string>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
+       <widget class="QListWidget" name="listWidget">
+        <item>
+         <property name="text">
+          <string>Recall</string>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Приложение для эффективного запоминания информации с помощью карточек</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>и интервального повторения.</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Функции:</string>
+         </property>
+         <property name="font">
+          <font>
+           <bold>true</bold>
+          </font>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>• Создание и редактирование карточек</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>• Интервальное повторение</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>• Статистика обучения</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>• Импорт и экспорт CSV</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>• Поддержка изображений</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>• Светлая и тёмная темы</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>

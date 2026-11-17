@@ -18,6 +18,7 @@ class StatisticsPage(QWidget):
             QCalendarWidget.SelectionMode.NoSelection)
 
         self.marked_dates = []
+        self.goal = 20
 
         self.update_data()
 
@@ -32,13 +33,15 @@ class StatisticsPage(QWidget):
         self.totalCardsValueLabel.setText(str(count_cards))
         self.totalReviewValueLabel.setText(str(count_reviews))
 
-    def update_daily_goal(self):
-        goal = 20
+    def update_daily_goal(self, goal=None):
+        if goal is not None:
+            self.goal = goal
+
         today_reviews = get_today_reviews_count()
 
-        self.progressBar.setRange(0, goal)
-        self.progressBar.setValue(min(today_reviews, goal))
-        self.goalLabel.setText(f"{today_reviews}/{goal}")
+        self.progressBar.setRange(0, self.goal)
+        self.progressBar.setValue(min(today_reviews, self.goal))
+        self.goalLabel.setText(f"{today_reviews}/{self.goal}")
 
     def update_calendar(self):
         for date in self.marked_dates:
